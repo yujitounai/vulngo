@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<title>JWTのテスト</title>
+<link rel ="stylesheet" type="text/css" href="./vuln.css" title="style">
+</head>
+<body onload="jwtlogin()">
+<script>
+function jwtlogin(){
+	var jwttoken;
+	const url = '/jwt/token';
+	fetch(url).then(function(response) {
+		return response.json();
+	}).then(function(json) {
+		jwttoken=json.token;
+		if(jwttoken){
+			fetch('/jwt/private', {
+				headers : new Headers({ 'Authorization' : jwttoken })
+			}).then(response => response.json())
+			.then(json => document.getElementById("msg").innerHTML=json.message);
+
+		}
+	});
+
+}
+
+</script>
+<div class="title">JSON Web Tokenのテストページ</div>
+<div class="box">
+<div id="msg"></div>
+</div>
+<input id="menu-cb" type="checkbox" value="off">
+<label id="menu-icon" for="menu-cb">≡</label>
+<label id="menu-background" for="menu-cb"></label>
+<div id="ham-menu">
+</div>
+<script src="menu.js"></script>
+</body>
+</html>

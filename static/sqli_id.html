@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<title>SQLのテスト</title>
+<link rel ="stylesheet" type="text/css" href="./vuln.css" title="style">
+</head>
+<body>
+<script>
+function fetchdata(id){
+	url = '/sqli/id/'+id;
+
+	fetch(url).then(function(response) {
+		return response.json();
+	}).then(function(json) {
+		var result = document.querySelector('#result');
+		result.innerHTML = "ID "+json.id+":"+json.name+"さんの住所は"+json.address+"です";
+	});
+
+}
+
+</script>
+<div class="title">ユーザー情報を取得します</div>
+<div class="box">
+<form>
+<input type="text" name="userid" value="1">
+<input type="submit" value="search" onclick="fetchdata(userid.value);return false;">
+</form>
+
+<div id="result"></div>
+</div>
+<input id="menu-cb" type="checkbox" value="off">
+<label id="menu-icon" for="menu-cb">≡</label>
+<label id="menu-background" for="menu-cb"></label>
+<div id="ham-menu">
+</div>
+<script src="menu.js"></script>
+</body>
+</html>

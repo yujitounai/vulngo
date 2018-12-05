@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<title>golangで脆弱性のあるWebサイトを作ってみた</title>
+<link rel ="stylesheet" type="text/css" href="./vuln.css" title="style">
+</head>
+<body>
+
+<div class="title">脆弱なWebサイトサンプル</div>
+<div class="box">
+<a href="/sqli_name">SQLインジェクション1</a><br>
+<a href="/nosqli_name">SQLインジェクション1できない版</a><br>
+<a href="/sqli_id">SQLインジェクション2</a><br>
+<a href="/nosqli_id">SQLインジェクション2できない版</a><br>
+<a href="/xss">XSS(GET)</a><br>
+<a href="/noxss">XSSできない版</a><br>
+<a href="/hredirect?redirect=/">オープンリダイレクト1</a><br>
+<a href="/redirect?redirect=/">オープンリダイレクト2</a><br>
+<a href="/ping1">安全でないコマンド実行</a><br>
+<a href="/ping2">たぶん安全なコマンド実行</a><br>
+<a href="/readfile">ディレクトリトラバーサル</a><br>
+<a href="/notraversal">ディレクトリトラバーサルできないファイル読み込み</a><br>
+<a href="/ssrf1">SSRF</a><br>
+<a href="/jwt">JSON Web Token</a><br>
+</div>
+
+<input id="menu-cb" type="checkbox" value="off">
+<label id="menu-icon" for="menu-cb">≡</label>
+<label id="menu-background" for="menu-cb"></label>
+<div id="ham-menu">
+</div>
+<script src="menu.js"></script>
+</body>
+</html>

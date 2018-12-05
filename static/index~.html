@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<title>golangで脆弱性のあるWebサイトを作ってみた</title>
+<link rel ="stylesheet" type="text/css" href="./vuln.css" title="style">
+</head>
+<body>
+
+<div class="title">脆弱なWebサイトサンプル</div>
+<div class="box">
+<a href="/sqli_name">SQLインジェクション1</a><br>
+<a href="/nosqli_name">SQLインジェクション1できない版</a><br>
+<a href="/sqli_id">SQLインジェクション2</a><br>
+<a href="/nosqli_id">SQLインジェクション2できない版</a><br>
+<a href="/xss">XSS(GET)</a><br>
+<a href="/noxss">XSSできない版</a><br>
+<a href="/hredirect?redirect=/">オープンリダイレクト1</a><br>
+<a href="/redirect?redirect=/">オープンリダイレクト2</a><br>
+<a href="/ping1">安全でないコマンド実行</a><br>
+<a href="/ping2">たぶん安全なコマンド実行</a><br>
+<a href="/readfile">ディレクトリトラバーサル</a><br>
+<a href="/notraversal">ディレクトリトラバーサルできないファイル読み込み</a><br>
+<a href="/ssrf1">SSRF</a><br>
+<a href="/jwt">JSON Web Token</a><br>
+</div>
+<hr>
+<a href="/sqli/admin'%20union%20select%201,sqlite_version(),3,4,5--%20">SQLインジェクション1</a><br>
+<a href="/nosqli/admin'%20union%20select%201,sqlite_version(),3,4,5--%20">SQLインジェクション1できない版</a><br>
+<a href="/sqli/id/10-length(sqlite_version())">SQLインジェクション2</a><br>
+<a href="/nosqli/id/10-length(sqlite_version())">SQLインジェクション2できない版</a><br>
+<a href="/xss?name=%3Cimg%20src=0%20onerror=alert(1)%3E">XSS(GET)</a><br>
+<a href="/noxss?name=%3Cimg%20src=0%20onerror=alert(1)%3E">XSSできない版</a><br>
+<a href="/hredirect?redirect=http://bogus.jp">オープンリダイレクト1</a><br>
+<a href="/redirect?redirect=http://bogus.jp">オープンリダイレクト2</a><br>
+<a href="/rce?rce=bogus.jp%3Bls">安全でないコマンド実行</a><br>
+<a href="/norce?rce=bogus.jp%3Bls">たぶん安全なコマンド実行</a><br>
+<a href="/traversal?file=../../../../../../../../etc/hosts">ディレクトリトラバーサル</a><br>
+<a href="/ssrfget?url=http%3A%2F%2F172.17.0.2%3A8081%2Fharada.jpg">SSRF1</a><br>
+<a href="/ssrfrequest?url=http%3A%2F%2F192.168.5.4%2Fhack%2Fxss_exif_3.jpg">SSRF2</a><br>
+
+
+
+<input id="menu-cb" type="checkbox" value="off">
+<label id="menu-icon" for="menu-cb">≡</label>
+<label id="menu-background" for="menu-cb"></label>
+<div id="ham-menu">
+</div>
+<script src="menu.js"></script>
+</body>
+</html>

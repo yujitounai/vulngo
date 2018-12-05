@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<title>ファイル読み込みのテスト</title>
+<link rel ="stylesheet" type="text/css" href="./vuln.css" title="style">
+</head>
+<body>
+<script>
+function fetchdata(url){
+	url = '/ssrfrequest?url='+url;
+
+	fetch(url)
+	  .then(response => {
+	    if (response.ok) {
+	      return response.json();
+	    } else {
+      	return Promise.reject(new Error('error'));
+      }
+	  })
+	  .then(json => {
+			var result = document.querySelector('#result');
+			result.innerHTML = '<img src="'+json.file+'">';
+	  })
+	  .catch(e => {
+	    console.log(e.message);
+	  });
+}
+
+</script>
+<div class="title">ファイルを読み込みます</div>
+<div class="box">
+<form>
+<input type="text" name="url" value="http://bogus.jp/img1.jpg">
+<input type="submit" value="search" onclick="fetchdata(url.value);return false;">
+</form>
+
+<div id="result"></div>
+</div>
+<input id="menu-cb" type="checkbox" value="off">
+<label id="menu-icon" for="menu-cb">≡</label>
+<label id="menu-background" for="menu-cb"></label>
+<div id="ham-menu">
+</div>
+<script src="menu.js"></script>
+</body>
+</html>
