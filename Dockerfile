@@ -6,7 +6,10 @@ ENV GOPATH $GOPATH:/go/src
 #とりあえず更新
 RUN apt-get update && \
     apt-get upgrade -y && \
-		apt-get install -y mysql-client
+		apt-get install -y default-mysql-client
+
+# go1.16から変わったらしいので対応
+RUN go env -w GO111MODULE=off 
 
 #インストール
 RUN go get github.com/mattn/go-sqlite3 && \
